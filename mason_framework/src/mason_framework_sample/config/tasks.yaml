@@ -1,0 +1,62 @@
+parse_input_task:
+  description: >
+    Parse  "{input_request}" and "{test_list}" to extract actionable details such as functionality, required libraries, and constraints.
+  expected_output: >
+    parsed_data
+  async_execution: false
+  agent: input_parser
+  track_interactions: true 
+
+requirements_analysis_task:
+  description: >
+    Analyze the parsed data to establish a detailed software specification outlining the software's functionality and design.
+  expected_output: >
+    software_spec
+  async_execution: false
+  agent: requirements_analyzer
+  context:
+  - parse_input_task
+  track_interactions: true 
+
+code_generation_task:
+  description: >
+    Generate Python code based on the provided software specification.
+    Make sure that the code will pass the given unit tests {test_list}.
+    Make sure that the function name, is the same name given in {function_name} 
+    Do not include the test cases in the code output.
+    The code must adhere to Python's best practices and ensure full executability. 
+    
+  expected_output: >
+    generated_code
+  async_execution: false
+  agent: code_generator
+  context:
+  - requirements_analysis_task
+  track_interactions: true 
+
+code_validation_task:
+  description: >
+    Validate the generated Python code for any syntax errors or runtime issues. 
+    Make sure that the code will pass the given unit tests {test_list}.
+    Make sure that the function name, is the same name given in {function_name}.
+    Confirm that the code is executable and error-free.
+    Confirm that the ocde does not contain the test cases. 
+    
+  expected_output: >
+    validated_code
+  async_execution: false
+  agent: code_validator
+  context:
+  - code_generation_task
+  track_interactions: true 
+
+file_output_task:
+  description: >
+    Save the entire evaluation into a Python file called output.py, ensuring proper formatting and execution permissions.
+  expected_output: >
+    output_filename
+  async_execution: false
+  agent: file_output_specialist
+  context:
+    - code_validation_task
+  track_interactions: true 

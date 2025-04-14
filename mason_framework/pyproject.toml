@@ -1,0 +1,23 @@
+[project]
+name = "mas_humaneval_openai"
+version = "0.1.0"
+description = "mas_humanEval_openai using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.102.0,<1.0.0"
+]
+
+[project.scripts]
+mas_humaneval_openai = "mas_humaneval_openai.main:run"
+run_crew = "mas_humaneval_openai.main:run"
+train = "mas_humaneval_openai.main:train"
+replay = "mas_humaneval_openai.main:replay"
+test = "mas_humaneval_openai.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
