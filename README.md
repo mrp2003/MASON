@@ -4,7 +4,7 @@ Welcome to the repository for **MASON**, a Multi-Agent LLM-based Framework for N
 
 ---
 
-## 📘 Table of Contents
+## Table of Contents
 
 - [Project Overview](#project-overview)
 - [Repository Structure](#repository-structure)
@@ -13,17 +13,12 @@ Welcome to the repository for **MASON**, a Multi-Agent LLM-based Framework for N
 - [Configuration](#configuration)
 - [Running the Framework](#running-the-framework)
 - [Results](#results)
-  - [Output Files](#output-files)
-  - [Visualizations](#visualizations)
 - [Evaluation Summary](#evaluation-summary)
 - [Agent Architecture](#agent-architecture)
 - [Limitations & Future Work](#limitations--future-work)
-- [Citation](#citation)
-- [License](#license)
-
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 This project evaluates whether **multi-agent systems (MAS)** powered by large language models can outperform single-agent setups in a **no-code software development** environment.
 
@@ -34,7 +29,7 @@ Specifically, we introduce a custom multi-agent orchestration framework called *
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```plaintext
 ├── data/
@@ -56,7 +51,7 @@ Specifically, we introduce a custom multi-agent orchestration framework called *
 └── README.md                 # You're here!
 ```
 ---
-## 🛠 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the repository
 
@@ -82,7 +77,7 @@ MODEL=<your_model_name>
 PROVIDER_API_KEY=<your_api_key>
 ```
 ---
-## 📦 Datasets
+## Datasets
 Both datasets used in evaluation are included in the data/ folder:
 
 - `mbpp.jsonl` (from Google Research)
@@ -92,7 +87,7 @@ Both datasets used in evaluation are included in the data/ folder:
 Each contains task descriptions, function signatures, and unit tests. The framework automatically parses them and sends to the appropriate agent.
 
 ---
-## ⚙️ Configuration
+## Configuration
 Agent and task settings can be customized under:
 
 - `agents.yaml`
@@ -123,15 +118,15 @@ research_task:
 ```
 
 ---
-## ▶️ Running the Framework
+## Running the Framework
 After configuring `tasks.yaml` and `agents.yaml`, run:
 
 ```bash
 crewai run
 ```
 ---
-## 📂 Results
-### 📄 Output Files
+## Results
+### Output Files
 Located in: `/Results/Output/`
 
 Each `.txt` file contains:
@@ -145,7 +140,7 @@ Each `.txt` file contains:
 - Pass/fail test case results
 
 
-### 📊 Visualizations
+### Visualizations
 Located in: `/Results/Visualizations/`
 
 Includes:
@@ -159,7 +154,7 @@ Includes:
 - MAS vs Single-Agent performance graphs
 
 ---
-## 🧠 Evaluation Summary
+## Evaluation Summary
 
 We evaluated across the following metrics:
 
@@ -172,35 +167,35 @@ We evaluated across the following metrics:
 
 ---
 
-## 🧩 Agent Architecture
+## Agent Architecture
 
 MASON operates using a **CrewAI-style sequential multi-agent system**, where each agent is assigned a specialized role in the code generation pipeline. These agents collaborate to transform natural language software requests into fully executable Python programs.
 
-- ### 🧾 Input Parsing Specialist
+- ### Input Parsing Specialist
     Extracts actionable information from natural language prompts—such as desired functionality, required libraries, or constraints—to produce a structured, interpretable input for the next agent.
 
-- ### 📋 Requirements Analysis Specialist
+- ### Requirements Analysis Specialist
     Converts parsed input into a formalized software specification. This specification guides code generation by capturing the technical scope, logic flow, and functional expectations.
 
-- ### 💻 Python Code Generator
+- ### Python Code Generator
     Translates the software specification into maintainable and well-structured Python code. Emphasizes clarity, modularity, and correctness in implementation.
 
-- ### 🧪 Code Validator
+- ### Code Validator
     Performs syntactic and runtime validation of the generated code to ensure it executes without errors. Catches exceptions, handles edge cases, and flags faulty logic.
 
-- ### 📂 File Output Specialist
+- ### File Output Specialist
     Packages the validated Python code into a standalone .py file, ready for execution or deployment. Ensures correct formatting and proper structure for downstream use.
 
 Each agent operates autonomously but in a predefined order, passing enriched context to the next role to ensure a cohesive and reliable workflow. This architecture allows for modularity, clarity in responsibility, and easier debugging across the generation process.
 
 ---
-## 🔍 Limitations & Future Work
+## Limitations & Future Work
 
-- ❌ **Execution time** is significantly higher in MAS due to inter-agent communication.
-- 🧠 **Small LLMs** (e.g., DeepSeek 1.3B) struggled to maintain state across tasks.
-- 📊 **Local execution** was sequential due to resource constraints (no GPUs).
+- **Execution time** is significantly higher in MAS due to inter-agent communication.
+- **Small LLMs** (e.g., DeepSeek 1.3B) struggled to maintain state across tasks.
+- **Local execution** was sequential due to resource constraints (no GPUs).
 
-### 🧗‍♂️ Future work includes:
+### Future work includes:
 - Designing lightweight MAS for small LLMs
 - Exploring open-source orchestration alternatives (AutoGen, LangGraph)
 - Incorporating agent learning from past tasks
