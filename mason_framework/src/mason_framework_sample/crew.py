@@ -3,7 +3,7 @@ from crewai_tools import FileWriterTool # type: ignore
 from crewai.project import CrewBase, agent, crew, task # type: ignore
 
 @CrewBase
-class MasHumanevalOpenai():
+class Mason():
 	
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
